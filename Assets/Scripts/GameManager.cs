@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public KeyCode left { get; set; }
     public KeyCode right { get; set; }
     public KeyCode jump { get; set; }
+    public KeyCode formChange { get; set; }
 
     private void Awake()
     {
@@ -47,12 +48,12 @@ public class GameManager : MonoBehaviour
         * are assigned to each Keycode via the second parameter
         * of the GetString() function
         */
-        this.jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "Space"));
-        this.forward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
-        this.backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
-        this.left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
-        this.right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
-
+        jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "Space"));
+        forward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
+        backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
+        left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
+        right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
+        formChange = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("formChange", "R"));
     }
 
 

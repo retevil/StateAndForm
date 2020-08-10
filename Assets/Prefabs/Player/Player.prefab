@@ -440,7 +440,7 @@ GameObject:
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -475,7 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3b059c5268a16419fa3df6dd1b5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  form: 0
+  formSelected: 0
+  reloadReformTime: 1.5
 --- !u!1 &1888677435389841202
 GameObject:
   m_ObjectHideFlags: 0

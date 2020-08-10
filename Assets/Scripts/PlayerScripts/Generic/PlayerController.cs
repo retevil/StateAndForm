@@ -8,9 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     public Form formSelected;
 
+    public float reloadReformTime = 1f;
+
     private CinemachineVirtualCamera VC;
 
     private ObjectMovement OM;
+
+    private float timeToReform = 0f;
 
 
     // Start is called before the first frame update
@@ -47,29 +51,38 @@ public class PlayerController : MonoBehaviour
     private void SetNewForm(ObjectMovement obj)
     {
         obj.Activate(true);
+        if (OM != null)
+        {
+            obj.transform.SetPositionAndRotation(OM.transform.position, OM.transform.rotation);
+        }
+
         OM = obj;
         OM.SetCamera(VC);
-        
+
     }
 
     private void SwitchForm()
     {
+
+
+
         switch (formSelected)
         {
             case Form.CUBE:
+
                 SetFormActive(Form.SPHERE);
                 break;
             case Form.SPHERE:
                 SetFormActive(Form.CONE);
                 break;
             case Form.CONE:
+
                 SetFormActive(Form.CUBE);
                 break;
-
-
             default:
                 break;
         }
+
     }
 
     private void FixedUpdate()
@@ -101,11 +114,12 @@ public class PlayerController : MonoBehaviour
             OM.Jump();
         }
 
-        if (Input.GetKeyDown(GameManager.GM.formChange))
+        if (Input.GetKey(GameManager.GM.formChange) && Time.time >= timeToReform)
         {
+            timeToReform = Time.time + reloadReformTime;
             SwitchForm();
         }
-
+        //gameObject.transform.SetPositionAndRotation(OM.transform., new Quaternion());
     }
 
 }

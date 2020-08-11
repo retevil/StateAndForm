@@ -8,6 +8,7 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(ShowIfAttribute), true)]
 public class ShowIfAttributeDrawer : PropertyDrawer
 {
+    private const float PADDING_SIZE = 15f;
 
     #region Reflection helpers.
     private static MethodInfo GetMethod(object target, string methodName)
@@ -121,7 +122,7 @@ public class ShowIfAttributeDrawer : PropertyDrawer
         if (!meetsCondition && showIfAttribute.Action ==
                                        ActionOnConditionFail.DontDraw)
             return 0;
-        return base.GetPropertyHeight(property, label);
+        return base.GetPropertyHeight(property, label)+PADDING_SIZE ;
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent
@@ -148,4 +149,5 @@ public class ShowIfAttributeDrawer : PropertyDrawer
         }
 
     }
+
 }

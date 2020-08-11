@@ -38,7 +38,28 @@ public class LevelManager : MonoBehaviour
             Debug.Log("You need to finish your tasks");
         }
     }
-
+    public Dictionary<TaskEnum, Task> GetDictionaryTasks()
+    {
+        Dictionary<TaskEnum, Task> taskDictionary = new Dictionary<TaskEnum, Task>();
+        foreach (TaskEnum task in tasks)
+        {
+            switch (task)
+            {
+                case TaskEnum.COLLECT_COINS:
+                    taskDictionary.Add(TaskEnum.COLLECT_COINS, coinTask);
+                    break;
+                case TaskEnum.DEFEAT_ENEMIES:
+                    taskDictionary.Add(TaskEnum.DEFEAT_ENEMIES, defeatEnemiesTask);
+                    break;
+                case TaskEnum.TIME_ATTACK:
+                    taskDictionary.Add(TaskEnum.TIME_ATTACK, timeAttackTask);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return taskDictionary;
+    }
     private void CheckCanFinish()
     {
         canFinish = true;
@@ -59,7 +80,7 @@ public class LevelManager : MonoBehaviour
             case TaskEnum.COLLECT_COINS:
                 return coinTask.GetComplete();
             case TaskEnum.DEFEAT_ENEMIES:
-                return coinTask.GetComplete();
+                return defeatEnemiesTask.GetComplete();
             case TaskEnum.TIME_ATTACK:
                 return timeAttackTask.GetComplete();
             default:
@@ -85,9 +106,16 @@ public class LevelManager : MonoBehaviour
         bool isTaskActive = false;
         foreach (var task in tasks)
         {
-            isTaskActive = task == taskToCheck;
+            if(task == taskToCheck)
+            {
+                isTaskActive = true;
+            }
+            
         }
 
-        return isTaskActive; /*secondaryMissions == TaskEnum.COLLECT_COINS;*/
+        return isTaskActive;
     }
+
+
+
 }

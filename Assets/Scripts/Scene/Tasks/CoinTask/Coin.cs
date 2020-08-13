@@ -28,6 +28,6 @@ public class Coin : MonoBehaviour
 
     private void DestroyCoin()
     {
-        GameObject.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

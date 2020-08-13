@@ -5,7 +5,10 @@ using System;
 
 public class LevelManager : MonoBehaviour
 {
-    
+
+    public delegate void WinAction();
+    public static event WinAction OnWin;
+
     public TaskEnum[] tasks;
 
     [ShowIf(ActionOnConditionFail.DontDraw, ConditionOperator.And, nameof(ShowCoinTaskParams))]
@@ -25,15 +28,20 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         CheckCanFinish();
-    } 
+    }
 
     public void PassLevel()
     {
         CheckCanFinish();
         if (canFinish == true)
         {
-            Debug.Log("You passed the level");
-        }else
+            if (OnWin != null)
+            {
+                OnWin();
+            }
+
+        }
+        else
         {
             Debug.Log("You need to finish your tasks");
         }
@@ -67,7 +75,7 @@ public class LevelManager : MonoBehaviour
         {
             foreach (var task in tasks)
             {
-               canFinish = CheckEachTask(task);
+                canFinish = CheckEachTask(task);
             }
         }
 
@@ -95,7 +103,7 @@ public class LevelManager : MonoBehaviour
     }
     private bool ShowTimeAttackTaskParams()
     {
-        return GetActiveTask(TaskEnum.TIME_ATTACK); 
+        return GetActiveTask(TaskEnum.TIME_ATTACK);
     }
     private bool ShowDefeatEnemiesTaskParams()
     {
@@ -106,11 +114,11 @@ public class LevelManager : MonoBehaviour
         bool isTaskActive = false;
         foreach (var task in tasks)
         {
-            if(task == taskToCheck)
+            if (task == taskToCheck)
             {
                 isTaskActive = true;
             }
-            
+
         }
 
         return isTaskActive;

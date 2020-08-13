@@ -15,5 +15,29 @@ public class TimeAttackTask : Task
     public override void setComplete()
     {
         Complete = UserTime <= timeLimit;
+        UpdateUIText();
+    }
+
+    public override void SetUIText()
+    {
+
+        string titleText = "Finish the level within " + timeLimit + " seconds: ";
+        string bodyText = UserTime + " / " + timeLimit;
+        string completionText = "You have finished the level within the time";
+
+        UITaskInfo.SetTexts(titleText, bodyText, completionText);
+    }
+    protected override void UpdateUIText()
+    {
+        if (Complete)
+        {
+            UITaskInfo.SetCompletionText();
+        }
+        else
+        {
+            UITaskInfo.bodyText = UserTime + " / " + timeLimit;
+            UITaskInfo.RefreshText();
+        }
+
     }
 }
